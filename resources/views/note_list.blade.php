@@ -15,7 +15,6 @@
         <tbody>
 @foreach($list as $note)
 <tr>
-   <!-- <td>{{$loop->iteration}}</td>-->
     <td>{{$note->id}}</td>
     <td>{{$note->note}}</td>
     <td>{{$note->date}}</td>
@@ -28,7 +27,6 @@
     document.addEventListener('DOMContentLoaded', function () {
 	// jquery code here
     $("[name=add_note_button]").on('click',function(){
-       // alert($('[name=add_note]').val());
         $.ajax({
             url: "api/save_note",
             type: "POST",
@@ -47,7 +45,7 @@
             },
             error: function () {
                 alert("nie je mozne pridat, zhoda pred datum "+$('[name=note_date]').val()+" je vacsia ako 80%");
-               // swal("Error", "Unable to bring up the dialog.", "error");
+              
             }
         });
         })
