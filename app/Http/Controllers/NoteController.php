@@ -16,10 +16,10 @@ class NoteController extends Controller
     }
 
     public function insertNote(Request $request){
-           $note_text=$request->get('note_text');
+        $note_text=$request->get('note_text');
+        $note_date=$request->get('note_date');
            $percentage=0;
-           $tes="";
-           $notes=Note::whereDate('created_at', Carbon::today())->get();
+           $notes=Note::whereDate('date', $note_date)->get();
             foreach($notes as $note){
                 $tes=similar_text($note->note,$note_text,$percentage);
                 if($percentage>80){
@@ -31,7 +31,7 @@ class NoteController extends Controller
                 }
             }
             $note=Note::create(
-                ['note'=>$note_text]
+                ['note'=>$note_text,'date'=>$note_date]
             );
             return response()->json([
                 "note"=>$note,
